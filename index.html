@@ -1,0 +1,39 @@
+<script type="text/javascript" 
+        src="http://192.168.0.13:5000/web-apps/apps/api/documents/api.js"></script>
+<button onclick="open_to_view('1.odt', 'text')">1.docx view</button>
+<div id="placeholder"></div>
+<script>
+
+function open_to_view(filename, documentType) {
+
+// Close the editors if they are open.
+
+if (this.docEditor) {
+this.docEditor.destroyEditor()
+}
+
+// Add the link to the file you want to open
+
+const url = window.location.protocol + "//" +
+ window.location.hostname + ':' + window.location.port + '/' + filename;
+ console.log(url)
+
+// Create DocsAPI object and open the editor
+
+this.docEditor = new DocsAPI.DocEditor("placeholder",
+
+{
+
+documentType: "word",
+
+document: { 
+    url: url,
+    title : "title" 
+},
+
+editorConfig: { mode: "edit" }
+
+});
+
+}
+</script>
